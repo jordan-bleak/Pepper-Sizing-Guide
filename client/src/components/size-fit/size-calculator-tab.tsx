@@ -25,7 +25,8 @@ export function SizeCalculatorTab() {
     <div
       style={{
         marginLeft: "auto",
-        width: "48%",
+        marginRight: "auto",
+        width: "60%",
       }}
     >
       <div

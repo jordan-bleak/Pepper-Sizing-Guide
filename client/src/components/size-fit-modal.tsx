@@ -108,20 +108,24 @@ export function SizeFitGuide() {
       <div
         style={{
           display: "flex",
-          flexDirection: "row",
+          flexDirection: "column",
           marginTop: activeTab === "measure" || activeTab === "conversion" ? "20px" : "56px",
         }}
       >
         {activeTab === "size-chart" && (
           <>
             <SizeChartTab />
-            <DescriptionPanel />
+            <div style={{ marginTop: "40px" }}>
+              <DescriptionPanel layout="horizontal" />
+            </div>
           </>
         )}
         {activeTab === "calculator" && (
           <>
             <SizeCalculatorTab />
-            <DescriptionPanel />
+            <div style={{ marginTop: "40px" }}>
+              <DescriptionPanel layout="horizontal" />
+            </div>
           </>
         )}
         {activeTab === "measure" && <HowToMeasureTab />}
