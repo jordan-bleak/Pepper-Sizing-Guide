@@ -177,41 +177,75 @@ export const conversionData = [
   { us: "40B", alpha: "XL", uk: "40B", eu: "90B", aus: "18B", fr: "105B", it: "5B", jp: "90C" },
 ];
 
+interface Range {
+  min: number;
+  max: number;
+}
+
+const underbustRangesInch: Range[] = [
+  { min: 25, max: 26 },
+  { min: 27, max: 28 },
+  { min: 29, max: 30 },
+  { min: 31, max: 32 },
+  { min: 33, max: 34 },
+  { min: 35, max: 36 },
+];
+
+const bustRangesInch: Range[] = [
+  { min: 30, max: 32 },
+  { min: 32, max: 33 },
+  { min: 33, max: 34 },
+  { min: 34, max: 35.5 },
+  { min: 35.5, max: 37.5 },
+  { min: 37.5, max: 40 },
+  { min: 40, max: 41 },
+];
+
+const underbustRangesCm: Range[] = [
+  { min: 63, max: 67 },
+  { min: 68, max: 72 },
+  { min: 73, max: 77 },
+  { min: 78, max: 82 },
+  { min: 83, max: 87 },
+  { min: 88, max: 92 },
+];
+
+const bustRangesCm: Range[] = [
+  { min: 76, max: 80 },
+  { min: 81, max: 84 },
+  { min: 84, max: 87 },
+  { min: 87, max: 90 },
+  { min: 90, max: 96 },
+  { min: 96, max: 101 },
+  { min: 101, max: 104 },
+];
+
+function findRangeIndex(value: number, ranges: Range[]): number {
+  for (let i = 0; i < ranges.length; i++) {
+    if (value >= ranges[i].min && value <= ranges[i].max) return i;
+  }
+  return -1;
+}
+
 export function calculateSize(
-  bandOrUnderbust: number,
-  bustSize: number,
+  underbust: number,
+  bust: number,
   unit: "in" | "cm"
 ): string | null {
-  let bandNum: number;
-  let diff: number;
+  const underbustRanges = unit === "in" ? underbustRangesInch : underbustRangesCm;
+  const bustRanges = unit === "in" ? bustRangesInch : bustRangesCm;
+  const chartData = unit === "in" ? sizeChartInch : sizeChartCm;
 
-  if (unit === "in") {
-    bandNum = Math.round(bandOrUnderbust);
-    if (bandNum % 2 !== 0) bandNum += 1;
-    diff = bustSize - bandOrUnderbust;
-  } else {
-    if (bandOrUnderbust <= 67) bandNum = 30;
-    else if (bandOrUnderbust <= 72) bandNum = 32;
-    else if (bandOrUnderbust <= 77) bandNum = 34;
-    else if (bandOrUnderbust <= 82) bandNum = 36;
-    else if (bandOrUnderbust <= 87) bandNum = 38;
-    else if (bandOrUnderbust <= 92) bandNum = 40;
-    else return null;
+  const rowIdx = findRangeIndex(underbust, underbustRanges);
+  const colIdx = findRangeIndex(bust, bustRanges);
 
-    const bustInches = bustSize / 2.54;
-    const underbustInches = bandOrUnderbust / 2.54;
-    diff = bustInches - underbustInches;
-  }
+  if (rowIdx === -1 || colIdx === -1) return null;
 
-  if (bandNum < 30 || bandNum > 40) return null;
+  const row = chartData[rowIdx];
+  if (!row) return null;
 
-  let cup: string;
-  if (diff < 0.5) cup = "AA";
-  else if (diff < 1.5) cup = "A";
-  else if (diff < 2.5) cup = "B";
-  else return null;
+  const cell = row.cells[colIdx];
+  if (!cell) return null;
 
-  if (bandNum === 30 && cup === "AA") return null;
-
-  return `${bandNum}${cup}`;
+  return cell.size;
 }
