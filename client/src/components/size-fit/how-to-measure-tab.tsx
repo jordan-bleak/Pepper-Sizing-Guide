@@ -1,4 +1,20 @@
+import { useState, useRef } from "react";
+
 export function HowToMeasureTab() {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handlePlayPause = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      videoRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
   return (
     <div
       style={{
@@ -8,6 +24,65 @@ export function HowToMeasureTab() {
         width: "100%",
       }}
     >
+      <div
+        data-testid="video-container"
+        style={{
+          display: "flex",
+          width: "100%",
+          position: "relative",
+          cursor: "pointer",
+        }}
+        onClick={handlePlayPause}
+      >
+        <video
+          ref={videoRef}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            borderRadius: "12px",
+          }}
+          onEnded={() => setIsPlaying(false)}
+          playsInline
+        >
+          <source src="/videos/finding-your-bra-size.mp4" type="video/mp4" />
+        </video>
+        {!isPlaying && (
+          <button
+            data-testid="button-play-video"
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePlayPause();
+            }}
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              cursor: "pointer",
+              background: "rgba(255, 255, 255, 0.85)",
+              border: "none",
+              borderRadius: "50%",
+              width: "60px",
+              height: "60px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s ease-in-out",
+            }}
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="rgb(18, 18, 18)"
+            >
+              <polygon points="6,3 20,12 6,21" />
+            </svg>
+          </button>
+        )}
+      </div>
+
       <div
         style={{
           maxWidth: "58%",
@@ -26,7 +101,7 @@ export function HowToMeasureTab() {
             color: "rgb(18, 18, 18)",
           }}
         >
-          Finding Your Bra Size
+          How do I measure?
         </h3>
         <p
           style={{
@@ -38,9 +113,9 @@ export function HowToMeasureTab() {
             textAlign: "center",
           }}
         >
-          Wear a lightly lined bra (no push-ups or compression bras) and use a
-          soft measuring tape. If you don't have a measuring tape, use a string
-          and then measure it against a ruler.
+          Before you start, put on a lightly lined bra — no push-ups or
+          compression sports bras — and grab a soft measuring tape. If you don't
+          have a measuring tape, it's no big deal. A string and a ruler work too.
         </p>
       </div>
 
