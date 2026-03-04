@@ -71,9 +71,24 @@ export function DescriptionPanel() {
           Go true-to-size for maximum lift. Size up the band and down the cup
           for a more relaxed fit.
         </p>
-        <p style={{ ...paragraphStyle, marginBottom: 0 }}>
+        <p style={{ ...paragraphStyle, marginBottom: "24px" }}>
           Fuller-B cups? Try our Signature All You, Limitless Wirefree Scoop
           Bra, or Signature Unlined Demi Bra.
+        </p>
+      </div>
+
+      <div>
+        <h3 style={headingStyle}>ADDITIONAL FIT TIPS</h3>
+        <p style={paragraphStyle}>
+          Want a snug, supportive fit with maximum lift? Go with your true band
+          and cup size.
+        </p>
+        <p style={paragraphStyle}>
+          Prefer a relaxed, easy fit? Size up the band, and size down the cup.
+        </p>
+        <p style={{ ...paragraphStyle, marginBottom: 0 }}>
+          Consider yourself a fuller B cup? Styles we recommend: Signature All
+          You, Limitless Wirefree Scoop Bra, Signature Unlined Demi Bra.
         </p>
       </div>
     </div>
