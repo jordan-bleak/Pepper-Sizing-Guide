@@ -22,7 +22,6 @@ export function SizeChartTab() {
     whiteSpace: "nowrap",
     lineHeight: 1,
     padding: "15px 4px",
-    width: "76px",
     border: "1px solid rgb(230, 230, 230)",
   };
 
@@ -32,8 +31,8 @@ export function SizeChartTab() {
         overflow: "auto",
         paddingLeft: "60px",
         position: "relative",
-        width: "752px",
-        flex: "0 1 auto",
+        flex: "1 1 auto",
+        minWidth: 0,
       }}
     >
       <div
@@ -150,7 +149,7 @@ export function SizeChartTab() {
           data-testid="table-size-chart"
           style={{
             borderCollapse: "collapse",
-            width: "672px",
+            width: "100%",
             marginLeft: "auto",
           }}
         >
@@ -162,6 +161,8 @@ export function SizeChartTab() {
                   background: "none",
                   border: "none",
                   height: "45px",
+                  width: "90px",
+                  minWidth: "90px",
                 }}
               />
               {bustHeaders.map((h, i) => (
@@ -195,6 +196,8 @@ export function SizeChartTab() {
                     borderRight: "2px solid rgb(32, 32, 32)",
                     fontWeight: 400,
                     backgroundColor: "#ffffff",
+                    width: "90px",
+                    minWidth: "90px",
                     ...(rowIdx === 0
                       ? { borderTop: "2px solid rgb(32, 32, 32)" }
                       : {}),
@@ -203,17 +206,12 @@ export function SizeChartTab() {
                   {row.underBust}
                 </td>
                 {row.cells.map((cell, colIdx) => {
-                  const isBCupCol = colIdx === 3;
-                  const isACupCol = colIdx === 2;
+                  const isOddCol = colIdx % 2 === 1;
                   let bgColor = "#ffffff";
                   if (cell) {
-                    if (isBCupCol) {
-                      bgColor = "rgb(225, 232, 247)";
-                    } else if (isACupCol) {
-                      bgColor = "rgb(225, 232, 247)";
-                    } else {
-                      bgColor = "rgb(250, 249, 248)";
-                    }
+                    bgColor = isOddCol
+                      ? "rgb(225, 232, 247)"
+                      : "rgb(250, 249, 248)";
                   }
 
                   return (

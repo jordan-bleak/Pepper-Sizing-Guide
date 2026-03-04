@@ -3,23 +3,31 @@ export interface SizeChartCell {
   alpha: string;
 }
 
+export const bustHeadersInch = ['30-32"', '32-33"', '33-34"', '34-35.5"', '35.5-37.5"', '37.5-40"', '40-41"'];
+
 export const sizeChartInch: { underBust: string; cells: (SizeChartCell | null)[] }[] = [
   {
     underBust: '25-26"',
     cells: [
-      null,
-      null,
       { size: "30A", alpha: "XXS" },
       { size: "30B", alpha: "XXS" },
+      null,
+      null,
+      null,
+      null,
+      null,
     ],
   },
   {
     underBust: '27-28"',
     cells: [
-      null,
       { size: "32AA", alpha: "XS" },
       { size: "32A", alpha: "XS" },
       { size: "32B", alpha: "XS" },
+      null,
+      null,
+      null,
+      null,
     ],
   },
   {
@@ -29,30 +37,42 @@ export const sizeChartInch: { underBust: string; cells: (SizeChartCell | null)[]
       { size: "34AA", alpha: "S" },
       { size: "34A", alpha: "S" },
       { size: "34B", alpha: "S" },
+      null,
+      null,
+      null,
     ],
   },
   {
     underBust: '31-32"',
     cells: [
       null,
+      null,
       { size: "36AA", alpha: "M" },
       { size: "36A", alpha: "M" },
       { size: "36B", alpha: "M" },
+      null,
+      null,
     ],
   },
   {
     underBust: '33-34"',
     cells: [
       null,
+      null,
+      null,
       { size: "38AA", alpha: "L" },
       { size: "38A", alpha: "L" },
       { size: "38B", alpha: "L" },
+      null,
     ],
   },
   {
     underBust: '35-36"',
     cells: [
       null,
+      null,
+      null,
+      null,
       { size: "40AA", alpha: "XL" },
       { size: "40A", alpha: "XL" },
       { size: "40B", alpha: "XL" },
@@ -60,75 +80,82 @@ export const sizeChartInch: { underBust: string; cells: (SizeChartCell | null)[]
   },
 ];
 
-export const bustHeadersInch = ['30-32"', '32-33"', '34-35"', '36-37"'];
+export const bustHeadersCm = ["76-80CM", "81-84CM", "84-87CM", "87-90CM", "90-96CM", "96-101CM", "101-104CM"];
 
 export const sizeChartCm: { underBust: string; cells: (SizeChartCell | null)[] }[] = [
   {
-    underBust: "63-66 cm",
+    underBust: "63-67CM",
     cells: [
-      null,
-      null,
       { size: "30A", alpha: "XXS" },
       { size: "30B", alpha: "XXS" },
+      null,
+      null,
+      null,
+      null,
+      null,
     ],
   },
   {
-    underBust: "68-71 cm",
+    underBust: "68-72CM",
     cells: [
-      null,
       { size: "32AA", alpha: "XS" },
       { size: "32A", alpha: "XS" },
       { size: "32B", alpha: "XS" },
+      null,
+      null,
+      null,
+      null,
     ],
   },
   {
-    underBust: "73-76 cm",
+    underBust: "73-77CM",
     cells: [
       null,
       { size: "34AA", alpha: "S" },
       { size: "34A", alpha: "S" },
       { size: "34B", alpha: "S" },
+      null,
+      null,
+      null,
     ],
   },
   {
-    underBust: "78-81 cm",
+    underBust: "78-82CM",
     cells: [
+      null,
       null,
       { size: "36AA", alpha: "M" },
       { size: "36A", alpha: "M" },
       { size: "36B", alpha: "M" },
+      null,
+      null,
     ],
   },
   {
-    underBust: "83-86 cm",
+    underBust: "83-87CM",
     cells: [
+      null,
+      null,
       null,
       { size: "38AA", alpha: "L" },
       { size: "38A", alpha: "L" },
       { size: "38B", alpha: "L" },
+      null,
     ],
   },
   {
-    underBust: "88-91 cm",
+    underBust: "88-92CM",
     cells: [
+      null,
+      null,
+      null,
       null,
       { size: "40AA", alpha: "XL" },
       { size: "40A", alpha: "XL" },
       { size: "40B", alpha: "XL" },
     ],
   },
-  {
-    underBust: "93-97 cm",
-    cells: [
-      null,
-      { size: "42AA", alpha: "XXL" },
-      { size: "42A", alpha: "XXL" },
-      { size: "42B", alpha: "XXL" },
-    ],
-  },
 ];
-
-export const bustHeadersCm = ["76-81 cm", "81-84 cm", "86-89 cm", "91-94 cm"];
 
 export const conversionData = [
   { us: "30A", alpha: "XXS", uk: "30A", eu: "65A", aus: "8A", fr: "80A", it: "0A", jp: "65B" },
@@ -163,13 +190,12 @@ export function calculateSize(
     if (bandNum % 2 !== 0) bandNum += 1;
     diff = bustSize - bandOrUnderbust;
   } else {
-    if (bandOrUnderbust <= 66) bandNum = 30;
-    else if (bandOrUnderbust <= 71) bandNum = 32;
-    else if (bandOrUnderbust <= 76) bandNum = 34;
-    else if (bandOrUnderbust <= 81) bandNum = 36;
-    else if (bandOrUnderbust <= 86) bandNum = 38;
-    else if (bandOrUnderbust <= 91) bandNum = 40;
-    else if (bandOrUnderbust <= 97) bandNum = 42;
+    if (bandOrUnderbust <= 67) bandNum = 30;
+    else if (bandOrUnderbust <= 72) bandNum = 32;
+    else if (bandOrUnderbust <= 77) bandNum = 34;
+    else if (bandOrUnderbust <= 82) bandNum = 36;
+    else if (bandOrUnderbust <= 87) bandNum = 38;
+    else if (bandOrUnderbust <= 92) bandNum = 40;
     else return null;
 
     const bustInches = bustSize / 2.54;
@@ -177,7 +203,7 @@ export function calculateSize(
     diff = bustInches - underbustInches;
   }
 
-  if (bandNum < 30 || bandNum > 42) return null;
+  if (bandNum < 30 || bandNum > 40) return null;
 
   let cup: string;
   if (diff < 0.5) cup = "AA";
@@ -186,7 +212,6 @@ export function calculateSize(
   else return null;
 
   if (bandNum === 30 && cup === "AA") return null;
-  if (bandNum === 42 && unit === "in") return null;
 
   return `${bandNum}${cup}`;
 }
