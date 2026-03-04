@@ -134,7 +134,7 @@ export function HowToMeasureTab() {
             "Keep the tape parallel to the floor and level around your back",
             "Exhale and take the measurement",
           ]}
-          bgColor="rgb(244, 242, 239)"
+          imageSrc="/images/underbust-measurement.jpg"
         />
         <StepCard
           stepNumber={2}
@@ -144,7 +144,7 @@ export function HowToMeasureTab() {
             "Keep the tape parallel to the floor",
             "Make sure the tape is snug but not too tight",
           ]}
-          bgColor="rgb(225, 232, 247)"
+          imageSrc="/images/bust-measurement.jpg"
         />
       </div>
     </div>
@@ -155,12 +155,12 @@ function StepCard({
   stepNumber,
   title,
   items,
-  bgColor,
+  imageSrc,
 }: {
   stepNumber: number;
   title: string;
   items: string[];
-  bgColor: string;
+  imageSrc: string;
 }) {
   return (
     <div
@@ -173,12 +173,15 @@ function StepCard({
         overflow: "visible",
       }}
     >
-      <div
+      <img
+        src={imageSrc}
+        alt={title}
         style={{
           width: "100%",
-          height: "340px",
+          height: "auto",
+          display: "block",
           borderRadius: "12px",
-          backgroundColor: bgColor,
+          objectFit: "cover",
         }}
       />
       <div
