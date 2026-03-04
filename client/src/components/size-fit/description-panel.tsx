@@ -31,7 +31,7 @@ export function DescriptionPanel({ layout = "vertical" }: { layout?: "vertical" 
         ...(isHorizontal
           ? {
               display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
               gap: "28px",
               width: "100%",
               maxWidth: "none",
