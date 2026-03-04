@@ -1,0 +1,56 @@
+Here's a complete breakdown of the "Size & Fit" modal on the Pepper product page. It has four tabs:
+Tab 1: Size Chart
+This is the main reference chart. It's a 2D grid that cross-references two body measurements to find your bra size.
+How to read it:
+
+Columns (top axis) = Bust measurement in ranges (e.g., 30–32", 32–33", up to 40–41")
+Rows (left axis) = Under-bust measurement in ranges (e.g., 25–26", 27–28", up to 35–36")
+The intersection cell shows your bra size (e.g., 34A) and the corresponding alpha size (XXS, XS, S, M, L, XL)
+Unit toggle: You can switch between IN (inches) and CM (centimeters). In CM mode, an additional size row appears (42AA/42A/42B at 93–97 cm under-bust).
+Color coding: Cells are shaded in light blue, with slightly darker blue highlighting used for certain size groups (the A-cup column appears most prominently highlighted, reflecting Pepper's AA–B cup specialty).
+The full size range covered:
+| Under-bust | Sizes available |
+|---|---|
+| 25–26" | 30A (XXS), 30B (XXS) |
+| 27–28" | 32AA (XS), 32A (XS), 32B (XS) |
+| 29–30" | 34AA (S), 34A (S), 34B (S) |
+| 31–32" | 36AA (M), 36A (M), 36B (M) |
+| 33–34" | 38AA (L), 38A (L), 38B (L) |
+| 35–36" | 40AA (XL), 40A (XL), 40B (XL) |
+Right-side panel (visible in all tabs) contains three advisory sections:
+HOW TO MEASURE — instructs to measure around the ribcage (under-bust) on exhale for band size, and around the fullest part of the bust for cup size. Recommends sizing up if between cup sizes. Contact: pepsquad@wearpepper.com.
+FIND YOUR SISTER SIZE — explains that moving vertically on the chart finds sister sizes with the same cup volume (e.g., 30A and 32AA are sister sizes).
+PEPPER FIT TIPS — states bras are designed for AA–B cups. Additional tips: go true-to-size for maximum lift; size up the band and down the cup for a relaxed fit; fuller-B cups are pointed to specific styles (Signature All You, Limitless Wirefree Scoop Bra, Signature Unlined Demi Bra).
+
+
+Tab 2: Size Calculator
+A calculator tool that takes your raw measurements and outputs your recommended size.
+How it works:
+
+IN mode: Two inputs — Band Size (your ribcage/under-bust measurement, e.g., 34.5") and Bust Size (your full bust measurement, e.g., 34.5")
+CM mode: Two inputs — Underbust Size (e.g., 60 cm) and Bust Size (e.g., 73 cm)
+After clicking "GET MY SIZE", the result appears below as "Your recommended size is: [size]", along with a "Shop Bras" link
+If measurements fall outside the available range, it displays: "We currently do not offer this size. Please double check your measurements or reach out to our fit experts."
+
+
+Tab 3: How to Measure
+A visual step-by-step measurement guide, combining a video and illustrated instructions.
+Video: A branded Pepper video titled "Finding Your Bra Size" (playable within the modal).
+Text intro: Instructs users to wear a lightly lined bra (no push-ups or compression bras) and use a soft measuring tape (or a string + ruler).
+Two illustrated steps, each with a photo:
+
+Underbust Measurement — Wrap the tape around your ribcage just beneath your bust, keeping it parallel to the floor and level around your back. Exhale and take the measurement.
+Bust Measurement — Wrap the tape around the fullest part of your bust, again keeping it parallel to the floor. Make sure the tape is snug but not too tight.
+
+
+Tab 4: International Size Conversion
+A lookup table that maps Pepper's US bra sizes to equivalent sizes in 7 international sizing systems.
+Columns (8 total): US · Alpha · UK · EU · AUS · FR (France) · ITLY (Italy) · JP (Japan)
+Full table (all 17 rows):
+USAlphaUKEUAUSFRITLYJP30AXXS30A65A8A80A0A65B30BXXS30B65B8B80B0B65C32AAXS32AA70AA10AA85AA1AA70A32AXS32A70A10A85A1A70B32BXS32B70B10B85B1B70C34AAS34AA75AA12AA90AA2AA75A34AS34A75A12A90A2A75B34BS34B75B12B90B2B75C36AAM36AA80AA14AA95AA3AA80A36AM36A80A14A95A3A80B36BM36B80B14B95B3B80C38AAL38AA85AA16AA100AA4AA85A38AL38A85A16A100A4A85B38BL38B85B16B100B4B85C40AAXL40AA90AA18AA105AA5AA90A40AXL40A90A18A105A5A90B40BXL40B90B18B105B5B90C*(The last row was partially cut off in the screenshot but follows the same pattern.)Key patterns in the international sizing:
+
+EU band = US band + 35 (e.g., 32 → 70, 34 → 75)
+FR band = US band + 50 (e.g., 32 → 85, 34 → 90)
+AUS band = US band ÷ 2 approximately, expressed as a different number system
+Italian sizing uses a simple sequential number (0, 1, 2, 3…) with AA/A/B cup suffix
+JP sizing uses the EU band number paired with a letter one step up the alphabet from US (e.g., US A → JP B, US B → JP C)

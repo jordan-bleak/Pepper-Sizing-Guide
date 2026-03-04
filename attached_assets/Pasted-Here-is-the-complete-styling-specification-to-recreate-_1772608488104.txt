@@ -1,0 +1,678 @@
+Here is the complete styling specification to recreate the Size & Fit modal exactly as it appears on Pepper's site.
+Pepper Size & Fit Modal — Complete Styling Reference
+
+CSS Custom Properties (Design Tokens)
+css:root {
+  /* Fonts */
+  --font-family-abc-whyte-book: "ABCWhyte-Book";
+  --font-family-abc-whyte-bold: "ABCWhyte-Bold";
+  /* Font sizes */
+  --font-size-12: 12px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-18: 18px;
+  --font-size-20: 20px;
+  --font-size-22: 22px;
+  --font-size-24: 24px;
+  /* Line heights */
+  --line-height-1:   1;
+  --line-height-1-2: 1.2;
+  --line-height-1-3: 1.3;
+  --line-height-1-4: 1.4;
+  --line-height-1-5: 1.5;
+  --line-height-1-6: 1.6;
+  /* Colors */
+  --color-black:            rgb(18, 18, 18);      /* body text / borders */
+  --color-white:            rgb(255, 255, 255);
+  --color-blue-sky:         #E1E8F7;              /* rgb(225, 232, 247) — highlighted cells, conversion header */
+  --color-table-blue:       rgb(250, 249, 248);   /* FAF9F8 — light grey cell fill & description bg */
+  --color-table-blue-light: rgb(255, 255, 255);   /* pure white cells */
+  --color-romance:          #f4f2ef;              /* inactive pill bg */
+  --color-light-cream:      rgb(244, 242, 239);   /* input bg */
+  --color-border-light:     rgb(230, 230, 230);   /* inactive pill border, cell separator */
+  --color-border-mid:       rgb(144, 144, 144);   /* conversion table vertical dividers */
+  --color-border-strong:    rgb(32, 32, 32);      /* active pill border, outer table border */
+  --color-text-muted:       rgb(194, 192, 190);   /* "Your recommended size is:" placeholder */
+  --color-step-circle:      rgb(191, 205, 193);   /* #BFCDC1 — green-grey step number circle */
+  /* Border radii */
+  --border-radius-12: 12px;
+  /* Layout */
+  --large-page-width: 1440px;
+  /* Transitions */
+  --slight-transition: all 0.2s ease-in-out;
+  --letter-spacing-minus-0-01: -0.01em; /* ≈ -0.14px at 14px */
+}
+
+1. Modal Overlay (Backdrop)
+cssmodal-dialog.size-chart-modal {
+  /* The custom element acting as the overlay */
+  display: flex;
+  position: fixed;
+  inset: 0;                          /* top: 0; right: 0; bottom: 0; left: 0 */
+  z-index: 35;
+  background-color: rgba(18, 18, 18, 0.2);
+  justify-content: center;
+  align-items: flex-start;           /* modal sits near top of viewport */
+  overflow: auto;
+}
+
+2. Modal Box (.modal-wrapper)
+css.size-chart-modal .modal-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 12px;               /* --border-radius-12 */
+  width: 1100px;
+  max-width: 1100px;
+  max-height: calc(100vh - 20px);    /* margin: 10px top/bottom */
+  margin: 10px;
+  padding: 0 30px 55px 30px;
+  overflow: auto;
+  box-shadow: none;
+}
+
+3. Header Row (.title-pills-close-container)
+css.title-pills-close-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 63;
+  background: #ffffff;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+}
+/* Inner wrapper: title + pill row */
+.title-pills-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 32px;
+}
+/* "Size & Fit" heading */
+h2.size_fit_title {
+  font-family: "ABCWhyte-Book";
+  font-size: 20px;
+  font-weight: 400;
+  color: rgb(18, 18, 18);
+  line-height: 24px;
+  margin: 0;
+  padding: 0;
+}
+/* Pill row */
+.pills-container {
+  display: flex;
+  flex-direction: row;
+  column-gap: 8px;
+}
+/* Inactive pill button */
+.size-chart-pill-button {
+  font-family: "ABCWhyte-Book";
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(32, 32, 32);
+  background-color: #ffffff;
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 40px;
+  padding: 10px 14px;
+  height: 41px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+/* Active pill button */
+.size-chart-pill-button.active {
+  border: 2px solid rgb(32, 32, 32);
+  animation: blink 0.2s ease 1;
+}
+@keyframes blink {
+  0%   { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+/* Close (×) button */
+.modal-close {
+  display: block;
+  width: 16px;
+  height: 16px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-left: auto;
+  cursor: pointer;
+  color: rgb(32, 32, 32);
+}
+/* SVG inside close button: two 16px diagonal lines forming ×, stroke = currentColor */
+
+4. Modal Content Area (.modal-content)
+css.size-chart-modal .modal-content {
+  display: flex;
+  flex-direction: row;
+  margin-top: 56px;  /* distance below the sticky header */
+}
+The content area is a two-column flex row: left = chart/calculator/measure content, right = description panel.
+5. Tab 1 — Size Chart
+5a. Left panel wrapper
+css.size-chart-modal.modal-wrapper-size-chart-bra .chart-buttons-wrapper {
+  overflow: auto;
+  padding-left: 60px;     /* space for the rotated "Under bust" label */
+  position: relative;
+  width: 752px;
+  flex: 0 1 auto;
+}
+5b. "Bust" title + IN/CM toggle row
+css.size-chart-modal .chart-buttons-wrapper .size_chart_title_and_selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 10px;
+  margin-bottom: 16px;
+}
+/* "Bust" label */
+.chart-title {
+  font-family: "ABCWhyte-Book";
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(18, 18, 18);
+}
+/* IN/CM toggle container */
+.size-chart-modal .size_chart_selector {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 40px;
+  overflow: hidden;
+  width: fit-content;
+  transition: 2s;
+}
+/* Both toggle buttons */
+.size-chart-modal .size_chart_selector_btn {
+  font-family: "ABCWhyte-Book";
+  font-size: 12px;
+  font-weight: 700;
+  background: #ffffff;
+  color: rgb(32, 32, 32);
+  border: none;
+  padding: 5px 13px;
+  cursor: pointer;
+  opacity: 0.5;               /* default inactive */
+  transition: var(--slight-transition);
+}
+/* Active toggle button */
+.size-chart-modal .size_chart_selector_btn.active {
+  background: rgb(32, 32, 32);
+  color: #ffffff;
+  border-radius: 40px;
+  opacity: 1;
+  animation: toggleAnimation 0.5s ease-in-out 1;
+}
+@keyframes toggleAnimation {
+  from { opacity: 0.5; }
+  to   { opacity: 1; }
+}
+5c. Size Chart Table
+css/* Table */
+.size_chart_table_holder table {
+  border-collapse: collapse;
+  width: 672px;
+  margin-left: auto;
+}
+/* ALL cells (th + td) base styles */
+.size_chart_table_holder table td,
+.size_chart_table_holder table th {
+  font-family: "ABCWhyte-Book";
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
+  padding: 15px 4px;
+  width: 76px;
+  border: 1px solid rgb(230, 230, 230);
+}
+/* Header row th height */
+.size_chart_table_holder table th {
+  height: 45px;        /* 46px computed */
+  font-weight: 400;    /* overridden for bra table */
+}
+/* Body td height */
+.size_chart_table_holder table td {
+  height: 54px;        /* 59.5px computed */
+}
+/* ── Bra-specific color/border overrides ── */
+/* Default cell bg (all cells reset to white first) */
+.size_chart_table_holder .size_chart_table_size-chart-bra table tbody td,
+.size_chart_table_holder .size_chart_table_size-chart-bra table thead th {
+  background-color: rgb(255, 255, 255);
+}
+/* Light grey fill on body cells (alternating columns, AA/A cup columns) */
+.size_chart_table_holder .size_chart_table_size-chart-bra table tbody tr td:not(:first-of-type):nth-of-type(2n),
+.size_chart_table_holder .size_chart_table_size-chart-bra table tbody tr td:not(:first-of-type):nth-of-type(2n+1) {
+  background-color: rgb(250, 249, 248);   /* --color-table-blue / #FAF9F8 */
+}
+/* Blue highlight on B cup (and every 3rd column from 4th onward) */
+.size_chart_table_size-chart-bra table tbody tr:first-child td:not(.td-background):nth-child(2n+4),
+.size_chart_table_size-chart-bra table tbody tr:not(:first-child) td:not(.td-background):nth-child(2n+3) {
+  background-color: rgb(225, 232, 247) !important;   /* --color-blue-sky */
+}
+/* Row label column (first col): strong left+right border */
+.size_chart_table_holder .size_chart_table_size-chart-bra table tbody tr td:first-child {
+  border-left:  2px solid rgb(32, 32, 32);
+  border-right: 2px solid rgb(32, 32, 32);
+}
+/* Header row (th): strong top + bottom borders on all non-first th */
+.size_chart_table_holder .size_chart_table_size-chart-bra table th:nth-child(n+2) {
+  border-bottom: 2px solid rgb(32, 32, 32);
+  border-top:    2px solid rgb(32, 32, 32);
+}
+/* Second header column: strong left border (starts the grid box) */
+.size_chart_table_holder .size_chart_table_size-chart-bra table thead tr th:nth-child(2) {
+  border-left: 2px solid rgb(32, 32, 32);
+}
+/* First header cell (corner): no border */
+.size_chart_table_holder table thead th.td-background {
+  background: none;
+  border: none;
+}
+/* First data row top border */
+#size-chart-table-inch tr:first-child td {
+  border-top: 2px solid rgb(32, 32, 32);
+}
+5d. Rotated "Under bust" axis label
+css.size-chart-modal.modal-wrapper-size-chart-bra .left-item-in-table {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 230px;
+  max-width: 46px;
+  width: 46px;
+  text-align: center;
+  font-family: "ABCWhyte-Book";
+  font-size: 14px;
+  color: rgb(18, 18, 18);
+  /* Text is split into two words "Under" / "bust" on separate lines via <br> or block children */
+}
+5e. Right-side Description Panel
+css.size-chart-description {
+  display: block;
+  background-color: rgb(250, 249, 248);   /* #FAF9F8 */
+  padding: 28px;
+  width: 260px;
+  max-width: 260px;
+  height: fit-content;
+  flex: 0 0 260px;
+}
+/* Section headings (HOW TO MEASURE, FIND YOUR SISTER SIZE, etc.) */
+.size_chart_table_desc h3 {
+  font-family: "ABCWhyte-Bold";
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(18, 18, 18);
+  letter-spacing: -0.14px;
+  margin: 0 0 12px 0;
+  text-transform: none;
+}
+/* Paragraphs */
+.size_chart_table_desc p {
+  font-family: "ABCWhyte-Book";
+  font-size: 12px;
+  font-weight: 400;
+  color: rgb(18, 18, 18);
+  line-height: 1.5;   /* 18px */
+  margin: 12px 0;
+  letter-spacing: -0.14px;
+}
+/* Links within description */
+.size-chart-description .size_chart_table_desc p a {
+  text-decoration: underline;
+}
+/* Last element in each section: no bottom margin */
+.size-chart-description .size_chart_table_desc h3:last-child,
+.size-chart-description .size_chart_table_desc p:last-child { margin-bottom: 0; }
+
+6. Tab 2 — Size Calculator
+css/* Calculator section occupies the left 48% of modal content */
+.size-chart--template-calculator {
+  margin-left: auto;
+  width: 48%;
+}
+/* Top bar: heading + toggle */
+.calculator-heading-toggle-btns-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   /* heading left, toggle right */
+  margin-bottom: 30px;
+}
+/* "Bra Size Calculator" heading */
+.calculator-heading {
+  font-family: "ABCWhyte-Bold";
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(18, 18, 18);
+  width: 50%;
+}
+/* IN/CM toggle container (same pill style as size chart) */
+.toggle-btns-wrapper {
+  display: flex;
+  width: fit-content;
+}
+/* The toggle is a hidden <input type="checkbox"> + <label> pill:
+   Label acts as the pill container */
+.toggle-switch-label {
+  display: block;
+  border: 2px solid rgb(230, 230, 230);
+  border-radius: 40px;
+  width: 82px;
+  height: 28px;
+  cursor: pointer;
+  position: relative;
+}
+/* IN / CM text labels inside toggle */
+.toggle-btn {
+  font-family: "ABCWhyte-Book";
+  font-size: 12px;
+  font-weight: 700;
+}
+.toggle-inch { padding: 5px 0 0 15px; }
+.toggle-cm   { padding: 5px 12px 0 0; }
+/* Fields column */
+.calculator-input-fields-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+/* Each step row (label + input) */
+.field_wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+/* "Step 1" / "Step 2" label */
+.step-wrapper {
+  font-family: "ABCWhyte-Bold";
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(18, 18, 18);
+  width: 20%;
+  flex-shrink: 0;
+}
+/* Number input fields */
+input.ribcage-input,
+input.bust-input {
+  background-color: rgb(244, 242, 239);   /* --color-light-cream */
+  border: none;
+  border-radius: 12px;
+  padding: 18px;
+  width: 100%;
+  font-size: 15px;
+  font-family: Arial, sans-serif;         /* browser default for inputs */
+  color: rgb(32, 32, 32);
+}
+input::placeholder { color: rgb(130, 130, 130); }
+/* GET MY SIZE button */
+.calculator-get-results {
+  display: inline-block;
+  background-color: rgb(32, 32, 32);
+  color: #ffffff;
+  font-family: "ABCWhyte-Bold";
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  padding: 11px 40px;
+  cursor: pointer;
+  margin-top: 16px;   /* gap from the last input row */
+}
+/* Result area (below divider line) */
+.calculator-results {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 65px;
+  padding: 20px 0;
+}
+/* "Your recommended size is:" */
+.result-title {
+  font-family: "ABCWhyte-Book";
+  font-size: 16px;
+  font-weight: 350;
+  color: rgb(194, 192, 190);   /* muted grey when no size yet */
+  text-align: center;
+}
+/* The actual result size ("XXX" placeholder, becomes e.g. "34A") */
+.pepper-size-results-wrapper {
+  font-family: "ABCWhyte-Bold";
+  font-size: 16px;              /* text-24 class present but overridden */
+  font-weight: 400;
+  color: rgb(32, 32, 32);
+  text-align: center;
+}
+/* "Shop Bras" link */
+.pepper-results-shop-btn {
+  font-family: "ABCWhyte-Book";
+  font-size: 14px;
+  color: rgb(18, 18, 18);
+  /* hidden via .stealth (display: none) until a result is shown */
+}
+
+7. Tab 3 — How to Measure
+css/* Outer section: column flex, large gap between video / text / steps */
+.size-chart--template-measure {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+/* ── Video ── */
+.size-chart--template-measure .video-container {
+  display: flex;
+  width: 100%;
+  /* margin-bottom removed (0 important) */
+}
+.size-chart--template-measure .video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Pause button: absolutely centered over the video */
+.size-chart--template-measure button.pause-video {
+  position: absolute;
+  left: 50%;
+  top:  50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  transition: var(--slight-transition);
+}
+/* Sound/mute button: hidden by default */
+.size-chart--template-measure button.muted-video {
+  display: none;
+}
+/* ── Intro text block ── */
+.size-chart-measure-content {
+  max-width: 58%;
+  margin: 0 auto;
+  text-align: center;
+}
+.size-chart-measure-content h3 {
+  font-family: "ABCWhyte-Bold";
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0 0 12px;
+  text-align: center;
+}
+.size-chart-measure-content p {
+  font-family: "ABCWhyte-Book";
+  font-size: 14px;
+  line-height: 21px;   /* ~1.5 */
+  color: rgb(18, 18, 18);
+  margin: 14px 0 0;
+  text-align: center;
+}
+/* ── Step cards ── */
+.img-tags-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+/* Each step card wrapper */
+.img-text-tag-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: calc(50% - 20px);   /* two cards side by side */
+  overflow: visible;
+}
+/* Floating white text card overlaid on top of image */
+.size-chart--template-measure .text-tag-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 21px 20px;          /* inset from card edges */
+  column-gap: 20px;
+  min-height: auto;
+  z-index: auto;
+}
+/* Step number + title row */
+.text-tag-wrapper .step-content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+/* Circular step number badge */
+.step-number-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(191, 205, 193);   /* #BFCDC1 — sage green */
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  font-family: "ABCWhyte-Bold";
+  font-size: 18px;
+  color: rgb(18, 18, 18);
+  flex-shrink: 0;
+}
+/* Step card heading ("Underbust Measurement" etc.) */
+.text-wrapper h3 {
+  font-family: "ABCWhyte-Bold";
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(18, 18, 18);
+  margin: 0 0 12px;
+}
+/* Bullet list */
+.text-wrapper ul {
+  margin: 0;
+  padding-left: 24px;
+  list-style-type: disc;
+}
+.size-chart--template-measure li {
+  font-family: "ABCWhyte-Book";
+  font-size: 12px;
+  line-height: 1.2;   /* 14.4px */
+  color: rgb(18, 18, 18);
+  margin: 0;
+}
+/* Photo image */
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+  /* natural size: 463 × 456 px (square-ish) */
+}
+
+8. Tab 4 — International Size Conversion
+css/* Container: horizontally scrollable */
+.size-conversion-table-container {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+/* Table */
+.conversion-chart-table-wrapper table {
+  border-collapse: collapse;
+  box-shadow: none;
+}
+/* Each row uses CSS Grid to enforce uniform column widths */
+.conversion-chart-table-wrapper table thead tr,
+.conversion-chart-table-wrapper table tbody tr {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);   /* 8 equal columns */
+}
+/* Header cells */
+.conversion-chart-table-wrapper table thead tr th {
+  background-color: rgb(225, 232, 247);   /* --color-blue-sky / #E1E8F7 */
+  color: rgb(32, 32, 32);
+  font-family: "ABCWhyte-Book";
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  padding: 16px 4px;
+  height: 52px;
+  width: 75px;
+  border: none;
+}
+.conversion-chart-table-wrapper table thead {
+  position: sticky;
+  top: -1px;
+  z-index: 33;
+}
+/* Data cells */
+.conversion-chart-table-wrapper table tbody tr td {
+  font-family: "ABCWhyte-Book";
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  padding: 16px 4px;
+  height: 47px;
+  width: 75px;
+  border: none;
+}
+/* Vertical column dividers (all cells except last column) */
+.conversion-chart-table-wrapper table tbody tr td:not(:last-child),
+.conversion-chart-table-wrapper table thead tr th:not(:last-child) {
+  border-right: 1px solid rgb(144, 144, 144);
+}
+/* Alternating row backgrounds */
+.conversion-chart-table-wrapper table tbody tr:nth-child(odd) td {
+  background-color: rgb(250, 249, 248);   /* light grey */
+  border-bottom: 1px solid rgb(230, 230, 230);
+  border-top:    1px solid rgb(230, 230, 230);
+}
+.conversion-chart-table-wrapper table tbody tr:nth-child(even) td {
+  background-color: rgb(255, 255, 255);
+}
+/* First row: no top border */
+.conversion-chart-table-wrapper table tbody tr:first-child td {
+  border-top: none;
+}
+/* Last row: bottom border */
+.conversion-chart-table-wrapper table tbody tr:last-child td {
+  border-bottom: 1px solid rgb(230, 230, 230);
+}
+/* "US" column: sticky (stays visible when scrolling right) */
+.conversion-chart-table-wrapper table .sidebar {
+  position: sticky;
+  left: -1px;
+  opacity: 1;
+  z-index: 30;
+}
+
+9. Typography Summary
+ElementFontSizeWeightColorModal title "Size & Fit"ABCWhyte-Book20px400#121212Tab pillsABCWhyte-Book12px400#202020Table cells (body)ABCWhyte-Book14px400#000000"Bust" axis labelABCWhyte-Book14px700#121212IN/CM toggleABCWhyte-Book12px700active: white / inactive: #202020Description headings (h3)ABCWhyte-Bold12px400#121212Description paragraphsABCWhyte-Book12px400#121212Calculator headingABCWhyte-Bold14px400#121212Step label ("Step 1")ABCWhyte-Bold14px400#121212GET MY SIZE buttonABCWhyte-Bold14px700white on #202020Result textABCWhyte-Bold16px400#202020"Your recommended size is:"ABCWhyte-Book16px350rgb(194,192,190)How to Measure h3ABCWhyte-Bold14px400#121212How to Measure pABCWhyte-Book14px400#121212Step card h3ABCWhyte-Bold14px400#121212Step card liABCWhyte-Book12px400#121212Conversion headerABCWhyte-Book14px700#202020Conversion bodyABCWhyte-Book14px400#121212
+
+10. Color Reference
+UseHex / RGBModal background#ffffffModal overlayrgba(18,18,18,0.2)Description panel bgrgb(250,249,248) = #FAF9F8Active pill borderrgb(32,32,32)Inactive pill borderrgb(230,230,230)Chart cell — whitergb(255,255,255)Chart cell — light greyrgb(250,249,248)Chart cell — blue (B cup)rgb(225,232,247) = #E1E8F7Table border strongrgb(32,32,32)Table border lightrgb(230,230,230)Conversion col dividerrgb(144,144,144)Input field bgrgb(244,242,239)GET MY SIZE bgrgb(32,32,32)Step number circlergb(191,205,193) = #BFCDC1Muted textrgb(194,192,190)
