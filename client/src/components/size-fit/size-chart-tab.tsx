@@ -14,25 +14,23 @@ export function SizeChartTab() {
 
   const cellBase: React.CSSProperties = {
     fontFamily: "'DM Sans', sans-serif",
-    fontSize: "14px",
+    fontSize: "clamp(10px, 1.3vw, 14px)",
     fontWeight: 400,
     color: "rgb(0, 0, 0)",
     textAlign: "center",
     textTransform: "uppercase",
     whiteSpace: "nowrap",
     lineHeight: 1,
-    padding: "15px 4px",
+    padding: "clamp(8px, 1.2vw, 15px) clamp(2px, 0.4vw, 4px)",
     border: "1px solid rgb(230, 230, 230)",
   };
 
   return (
     <div
       style={{
-        overflow: "auto",
-        paddingLeft: "60px",
+        paddingLeft: "clamp(40px, 5vw, 60px)",
         position: "relative",
-        flex: "1 1 auto",
-        minWidth: 0,
+        width: "100%",
       }}
     >
       <div
@@ -40,12 +38,13 @@ export function SizeChartTab() {
           display: "block",
           position: "absolute",
           left: 0,
-          top: "230px",
-          maxWidth: "46px",
-          width: "46px",
+          top: "50%",
+          transform: "translateY(-50%)",
+          maxWidth: "clamp(32px, 4vw, 46px)",
+          width: "clamp(32px, 4vw, 46px)",
           textAlign: "center",
           fontFamily: "'DM Sans', sans-serif",
-          fontSize: "14px",
+          fontSize: "clamp(11px, 1.3vw, 14px)",
           color: "rgb(18, 18, 18)",
           fontWeight: 700,
           lineHeight: 1.3,
@@ -62,14 +61,14 @@ export function SizeChartTab() {
           justifyContent: "space-between",
           alignItems: "center",
           paddingRight: "10px",
-          marginBottom: "16px",
+          marginBottom: "clamp(8px, 1.2vw, 16px)",
         }}
       >
         <span
           data-testid="text-bust-label"
           style={{
             fontFamily: "'DM Sans', sans-serif",
-            fontSize: "14px",
+            fontSize: "clamp(11px, 1.3vw, 14px)",
             fontWeight: 700,
             color: "rgb(18, 18, 18)",
           }}
@@ -150,9 +149,15 @@ export function SizeChartTab() {
           style={{
             borderCollapse: "collapse",
             width: "100%",
-            marginLeft: "auto",
+            tableLayout: "fixed",
           }}
         >
+          <colgroup>
+            <col style={{ width: "12.5%" }} />
+            {bustHeaders.map((_, i) => (
+              <col key={i} style={{ width: `${87.5 / bustHeaders.length}%` }} />
+            ))}
+          </colgroup>
           <thead>
             <tr>
               <th
@@ -160,9 +165,7 @@ export function SizeChartTab() {
                   ...cellBase,
                   background: "none",
                   border: "none",
-                  height: "45px",
-                  width: "90px",
-                  minWidth: "90px",
+                  height: "auto",
                 }}
               />
               {bustHeaders.map((h, i) => (
@@ -170,7 +173,7 @@ export function SizeChartTab() {
                   key={h}
                   style={{
                     ...cellBase,
-                    height: "45px",
+                    height: "auto",
                     fontWeight: 400,
                     backgroundColor: "#ffffff",
                     borderBottom: "2px solid rgb(32, 32, 32)",
@@ -191,13 +194,11 @@ export function SizeChartTab() {
                 <td
                   style={{
                     ...cellBase,
-                    height: "54px",
+                    height: "auto",
                     borderLeft: "2px solid rgb(32, 32, 32)",
                     borderRight: "2px solid rgb(32, 32, 32)",
                     fontWeight: 400,
                     backgroundColor: "#ffffff",
-                    width: "90px",
-                    minWidth: "90px",
                     ...(rowIdx === 0
                       ? { borderTop: "2px solid rgb(32, 32, 32)" }
                       : {}),
@@ -220,7 +221,7 @@ export function SizeChartTab() {
                       data-testid={cell ? `cell-size-${cell.size}` : undefined}
                       style={{
                         ...cellBase,
-                        height: "54px",
+                        height: "auto",
                         backgroundColor: bgColor,
                         ...(rowIdx === 0
                           ? { borderTop: "2px solid rgb(32, 32, 32)" }
@@ -231,7 +232,12 @@ export function SizeChartTab() {
                         <>
                           {cell.size}
                           <br />
-                          <span style={{ fontSize: "11px", opacity: 0.7 }}>
+                          <span
+                            style={{
+                              fontSize: "clamp(9px, 1vw, 11px)",
+                              opacity: 0.7,
+                            }}
+                          >
                             {cell.alpha}
                           </span>
                         </>
