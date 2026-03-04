@@ -36,72 +36,66 @@ export function SizeFitGuide() {
           flexDirection: "row",
           justifyContent: "flex-start",
           alignItems: "center",
+          flexWrap: "wrap",
+          gap: "clamp(8px, 1.5vw, 16px)",
           position: "sticky",
           top: 0,
           zIndex: 63,
           background: "#ffffff",
-          paddingTop: "30px",
-          paddingBottom: "20px",
+          paddingTop: "clamp(16px, 2.5vw, 30px)",
+          paddingBottom: "clamp(12px, 1.5vw, 20px)",
           marginBottom: "10px",
         }}
       >
+        <h2
+          data-testid="text-page-title"
+          style={{
+            fontFamily: "'DM Sans', sans-serif",
+            fontSize: "clamp(16px, 1.8vw, 20px)",
+            fontWeight: 400,
+            color: "rgb(18, 18, 18)",
+            lineHeight: "24px",
+            margin: 0,
+            padding: 0,
+            whiteSpace: "nowrap",
+          }}
+        >
+          Size & Fit
+        </h2>
         <div
           style={{
             display: "flex",
             flexDirection: "row",
-            alignItems: "center",
-            columnGap: "32px",
+            flexWrap: "wrap",
+            gap: "clamp(4px, 0.6vw, 8px)",
           }}
         >
-          <h2
-            data-testid="text-page-title"
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: "20px",
-              fontWeight: 400,
-              color: "rgb(18, 18, 18)",
-              lineHeight: "24px",
-              margin: 0,
-              padding: 0,
-              whiteSpace: "nowrap",
-            }}
-          >
-            Size & Fit
-          </h2>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              columnGap: "8px",
-            }}
-          >
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                data-testid={`button-tab-${tab.id}`}
-                onClick={() => setActiveTab(tab.id)}
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "rgb(32, 32, 32)",
-                  backgroundColor: "#ffffff",
-                  border:
-                    activeTab === tab.id
-                      ? "2px solid rgb(32, 32, 32)"
-                      : "2px solid rgb(230, 230, 230)",
-                  borderRadius: "40px",
-                  padding: "10px 14px",
-                  height: "41px",
-                  cursor: "pointer",
-                  transition: "0.4s",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              data-testid={`button-tab-${tab.id}`}
+              onClick={() => setActiveTab(tab.id)}
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: "clamp(10px, 1.1vw, 12px)",
+                fontWeight: 400,
+                color: "rgb(32, 32, 32)",
+                backgroundColor: "#ffffff",
+                border:
+                  activeTab === tab.id
+                    ? "2px solid rgb(32, 32, 32)"
+                    : "2px solid rgb(230, 230, 230)",
+                borderRadius: "40px",
+                padding: "clamp(6px, 0.9vw, 10px) clamp(8px, 1.2vw, 14px)",
+                height: "auto",
+                cursor: "pointer",
+                transition: "0.4s",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {tab.label}
+            </button>
+          ))}
         </div>
       </div>
 
