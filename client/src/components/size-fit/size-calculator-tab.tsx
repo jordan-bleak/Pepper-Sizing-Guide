@@ -223,6 +223,14 @@ export function SizeCalculatorTab() {
       <button
         data-testid="button-get-my-size"
         onClick={handleCalculate}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = "#C8D540";
+          e.currentTarget.style.color = "rgb(18, 18, 18)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = "rgb(32, 32, 32)";
+          e.currentTarget.style.color = "#ffffff";
+        }}
         style={{
           display: "inline-block",
           backgroundColor: "rgb(32, 32, 32)",
@@ -237,6 +245,7 @@ export function SizeCalculatorTab() {
           padding: "11px 40px",
           cursor: "pointer",
           marginTop: "16px",
+          transition: "all 0.2s ease-in-out",
         }}
       >
         Get My Size
@@ -278,23 +287,14 @@ export function SizeCalculatorTab() {
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: "16px",
                     fontWeight: 700,
-                    color: "rgb(32, 32, 32)",
+                    color: "rgb(18, 18, 18)",
+                    backgroundColor: "#C8D540",
+                    borderRadius: "40px",
+                    padding: "8px 24px",
                   }}
                 >
                   {result}
                 </span>
-                <a
-                  data-testid="link-shop-bras"
-                  href="#"
-                  style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: "14px",
-                    color: "rgb(18, 18, 18)",
-                    textDecoration: "underline",
-                  }}
-                >
-                  Shop Bras
-                </a>
               </>
             ) : (
               <span
